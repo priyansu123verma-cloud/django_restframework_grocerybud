@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: grocery-bud
+    env: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: false
+      - key: DATABASE_URL
+        sync: false

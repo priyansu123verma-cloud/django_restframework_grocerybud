@@ -4,3 +4,5 @@ __pycache__/
 .env.local
 .env.*.local
 __pypackages__/
+pyproject.toml
+pdm.lock

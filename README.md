@@ -109,7 +109,24 @@ GroceryBud/
    ```
 
    Backend runs at: `http://localhost:8000`
+#### Vercel deployment
 
+This repository is configured for Vercel hosting. The backend lives in the `backend` subdirectory, and the build process is intentionally pip‑based so that Vercel does not attempt to run `uv lock` (a PDM step that previously failed due to a locked `sqlparse` version).
+
+If you create or manage the Vercel project yourself, use these settings:
+
+* **Root Directory:** `backend`
+* **Framework Preset:** None (Python)
+* **Build Command:**
+  ```bash
+  pip install -r requirements.txt && python manage.py migrate
+  ```
+* **Start Command:**
+  ```bash
+  python manage.py runserver 0.0.0.0:$PORT
+  ```
+
+`backend/.vercelignore` already excludes `pyproject.toml`, `pdm.lock`, and `uv.lock` so they are never uploaded and the build remains clean.
 ### Frontend Setup
 
 1. **Navigate to frontend directory:**

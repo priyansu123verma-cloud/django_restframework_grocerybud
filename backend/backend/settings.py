@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-c*b^w62c8c8#mby!o6(n1-ks+(7pryq84h)3^jy5&mr_%@t(%z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # temporary, will set Render domain later
+
+# CSRF Trusted Origins for Vercel/React frontend
+CSRF_TRUSTED_ORIGINS = [
+    "https://your-frontend.vercel.app",
+]
 
 
 # Application definition
@@ -37,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -112,6 +119,10 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# CORS settings for React frontend
+CORS_ALLOW_ALL_ORIGINS = True  # Set to specific origins for production security
